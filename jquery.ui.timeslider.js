@@ -23,22 +23,24 @@
             }
         
             return hours + ":" + minutes + " " + time;
-        },
+	
+      },
         _slideTime: function (event, ui){
             var that = $(this),
-                startTime = null,
-                endTime = null;
+                stTime = null,
+                eTime = null;
             
             if(that.slider( "option", "range" )){
-                startTime = that.timeslider('getTime',(that.slider("values", 0)));
-                endTime = that.timeslider('getTime', that.slider("values", 1));
+                stTime = that.timeslider('getTime',(that.slider("values", 0)));
+                eTime = that.timeslider('getTime', that.slider("values", 1));
             
-                 that.timeslider('option', 'timeDisplay').text(startTime + ' - ' + endTime);
+                 that.timeslider('option', 'startTime').val(stTime);
+		 that.timeslider('option', 'endTime').val(eTime);
             }
             else {
-                startTime = that.timeslider('getTime', that.slider("value"));
+                stTime = that.timeslider('getTime', that.slider("value"));
     
-                that.timeslider('option', 'timeDisplay').text(startTime);
+                that.timeslider('option', 'startTime').val(stTime);
             }
         },
         _checkMax: function(event, ui) {
@@ -62,7 +64,8 @@
         options: {
             sliderOptions: {},
             errorMessage: null,
-            timeDisplay: null,
+            startTime: null,
+	    endTime: null,
             submitButton: null,
             clickSubmit: null
             
@@ -78,7 +81,8 @@
                 el.slider(o.sliderOptions);
                 
                 o.errorMessage = $(o.errorMessage);
-                o.timeDisplay = $(o.timeDisplay);
+                o.endTime = $(o.endTime);                
+	    	o.startTime = $(o.startTime);
                 o.submitButton = $(o.submitButton).click(o.clickSubmit);
                 
                 
